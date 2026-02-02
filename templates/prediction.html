@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+       body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-image: url("/static/mail_digital.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+
+.card {
+    position: relative;
+    z-index: 1;
+
+    
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    padding: 40px 50px;
+    width: 420px;
+    border-radius: 18px;
+    text-align: center;
+
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+
+.pre{
+    color: rgb(255, 0, 76);
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: none;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: rgb(255, 0, 76);
+    box-shadow: 0 0 6px rgba(255, 0, 76, 0.4);
+}
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background: rgb(255, 0, 76);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    
+}
+
+button:hover {
+    background: rgb(220, 0, 65);
+}
+.result {
+    margin-top: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.success {
+    color: rgb(77, 248, 77);
+}
+
+.error {
+    color: rgba(252, 8, 8, 0.99);
+}
+.home-btn {
+    position: fixed;
+    top: 25px;
+    right: 30px;
+    z-index: 10;
+
+    padding: 10px 22px;
+    font-size: 16px;
+    font-weight: bold;
+
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    background: rgba(255, 0, 76, 0.85);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 15px;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 360px;
+        padding: 25px 22px;
+        border-radius: 14px;
+    }
+
+    .pre {
+        font-size: 26px;
+    }
+
+    textarea {
+        height: 120px;
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 11px;
+    }
+
+    .result {
+        font-size: 22px;
+    }
+
+    .home-btn {
+        top: 15px;
+        right: 15px;
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+     
+    .result {
+            animation: pop 0.4s ease;
+           }
+
+@keyframes pop {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+   <a href="/" class="home-btn">Home</a>
+
+    <div class="card">
+    <h2 class="pre">Predict</h2>
+
+    <form method="POST">
+        <textarea 
+            name="mail"
+            id="mail"
+            placeholder="Enter your email message here"
+            required
+        ></textarea>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+        {% if result == "Message is ham" %}
+            <h2 class="result success">{{ result }}</h2>
+        {% else %}
+            <h2 class="result error">{{ result }}</h2>
+        {% endif %}
+    {% endif %}
+</div>
+
+
+</body>
+</html>
