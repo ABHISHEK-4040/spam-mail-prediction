@@ -35,7 +35,6 @@ def predict():
 
 @app.route("/Error")
 def error_handling():
-    winsound.Beep(500,2000)
     error=session['er']
     return render_template("error.html",Error=error)
 
